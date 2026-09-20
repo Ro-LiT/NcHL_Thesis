@@ -1,0 +1,42 @@
+#!/bin/bash
+#PBS -N rq1-training-40
+#PBS -q commonCPUQ
+#PBS -l walltime=24:00:00
+#PBS -l select=1:ncpus=40:mem=40gb
+#PBS -j oe
+
+set -euo pipefail
+
+cd "${PBS_O_WORKDIR:-$(pwd)}"
+source pbs/activate_environment.sh
+
+export PYTHONUNBUFFERED=1
+export OMP_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+export NUMEXPR_NUM_THREADS=1
+export MPLBACKEND=Agg
+export MPLCONFIGDIR="${PBS_TMPDIR:-/tmp}/matplotlib_${PBS_JOBID:-manual}"
+mkdir -p "$MPLCONFIGDIR"
+
+if [ -n "$(git status --porcelain)" ]; then
+  echo "Final experiments require a clean Git checkout" >&2
+  exit 1
+fi
+
+RESULTS_ROOT="${RESULTS_ROOT:-${PBS_O_WORKDIR:-$(pwd)}/results/hpc_rq1}"
+mkdir -p "$RESULTS_ROOT"
+conda list --explicit > "$RESULTS_ROOT/conda-explicit.txt"
+
+echo "Host: $(hostname)"
+echo "Start: $(date)"
+echo "Experiment: RQ1 Static-ES versus NcHL-ES training"
+echo "Training seeds: 0 1 2 3 4 5 6 7 8 9"
+echo "Results: $RESULTS_ROOT"
+python scripts/run_nominal_suite.py \
+  --final \
+  --seeds 0 1 2 3 4 5 6 7 8 9 \
+  --output "$RESULTS_ROOT/nominal" \
+  --workers 40 \
+  --resume
+echo "End: $(date)"

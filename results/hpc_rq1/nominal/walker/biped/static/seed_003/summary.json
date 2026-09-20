@@ -1,0 +1,7 @@
+{
+  "best_fitness": 6.006766148832288,
+  "best_genome_path": "/home/rowanli.tangalin/tpr/tpr/results/hpc_rq1/nominal/walker/biped/static/seed_003/best_genome.npy",
+  "completed_generations": 500,
+  "configured_generations": 500,
+  "resumed": false
+}

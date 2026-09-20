@@ -1,0 +1,29 @@
+schema_version: 2
+name: nominal_thrower_biped_nchl_seed_004
+seed: 4
+task: Thrower-v0
+morphology: biped
+network:
+  hidden_sizes:
+  - input
+  activation: tanh
+  bias: false
+controller:
+  kind: nchl
+  initial_weight_low: -0.1
+  initial_weight_high: 0.1
+  eta: 0.1
+evolution:
+  kind: es1
+  population_size: 40
+  generations: 500
+  sigma: 0.35
+evaluation:
+  protocol: nominal
+  episodes_per_candidate: 3
+  fitness_aggregation: mean
+  record_trace: false
+runtime:
+  device: cpu
+  workers: 40
+  torch_threads_per_worker: 1

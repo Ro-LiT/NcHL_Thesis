@@ -1,0 +1,7 @@
+{
+  "best_fitness": 3.4009116092928484,
+  "best_genome_path": "/home/rowanli.tangalin/tpr/tpr/results/hpc_rq1/nominal/thrower/thrower_arm/static/seed_006/best_genome.npy",
+  "completed_generations": 500,
+  "configured_generations": 500,
+  "resumed": false
+}

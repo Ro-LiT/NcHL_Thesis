@@ -1,0 +1,40 @@
+schema_version: 2
+protocol_id: nchl-evogym-four-task-v4-500-generations
+status: frozen
+sample_size_status: frozen_by_resource_constraint
+conditions:
+  - {task: Walker-v0, morphology: biped}
+  - {task: Carrier-v0, morphology: biped}
+  - {task: Jumper-v0, morphology: biped}
+  - {task: Thrower-v0, morphology: biped}
+  - {task: Thrower-v0, morphology: thrower_arm}
+controllers: [static, nchl]
+training_seeds: [0, 1, 2, 3, 4]
+calibration_seeds: [100, 101, 102, 103, 104]
+population_size: 40
+generations: 500
+sigma: 0.35
+nchl_parameters: [A, B, C, D]
+nchl_eta: 0.1
+episodes_per_candidate:
+  static: 1
+  nchl: 3
+heldout_episodes_per_run: 10
+claims:
+  - id: nominal_heldout_by_task_morphology
+    priority: primary
+    study: nominal
+    outcome: heldout_fitness
+    stratum: task_morphology
+    strata:
+      - Walker-v0:biped
+      - Carrier-v0:biped
+      - Jumper-v0:biped
+      - Thrower-v0:biped
+      - Thrower-v0:thrower_arm
+    comparison: nchl_vs_static
+    test: mann_whitney_u
+    correction_family: nominal_five_task_morphologies
+    direction: higher_favors_nchl
+    inclusion: all_complete_runs
+    planned_runs_per_controller: 5

@@ -1,0 +1,29 @@
+#!/bin/bash
+#PBS -N rq1-timing-40
+#PBS -q commonCPUQ
+#PBS -l walltime=06:00:00
+#PBS -l select=1:ncpus=40:mem=40gb
+#PBS -j oe
+
+set -euo pipefail
+
+cd "${PBS_O_WORKDIR:-$(pwd)}"
+source pbs/activate_environment.sh
+
+export PYTHONUNBUFFERED=1
+export OMP_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+export NUMEXPR_NUM_THREADS=1
+export MPLBACKEND=Agg
+export MPLCONFIGDIR="${PBS_TMPDIR:-/tmp}/matplotlib_${PBS_JOBID:-manual}"
+mkdir -p "$MPLCONFIGDIR"
+
+OUTPUT="${OUTPUT:-artifacts/rq1_timing_40_workers_${PBS_JOBID:-manual}}"
+
+echo "Host: $(hostname)"
+echo "Start: $(date)"
+python scripts/time_rq1_training.py \
+  --workers 40 \
+  --output "$OUTPUT"
+echo "End: $(date)"

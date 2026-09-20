@@ -1,0 +1,16 @@
+{
+  "artifact_schema_version": 1,
+  "artifact_sha256": {
+    "best_genome.npy": "30180489815d5f1159bd8494e59d0acf98f8fdfbee4f8173c93219a2785eea60",
+    "checkpoint.pkl": "67835cbb2134706878804c10e4c42d4386ba2332863112df48a6520cfde9eae2",
+    "config.yaml": "21c9f4f97460156e34d1d23f465b117672fda52afc64c13fa10bd6372cd7ca0d",
+    "manifest.json": "70f7c893be7a3768d826227771f35b10958f8b9ce5800651601efd3c24db32f7",
+    "metrics.csv": "c59bd4cedeb02d90a637737e69d232a2df37c3222c115d3d08443bd365eb3978",
+    "summary.json": "94d9bf4814b8baad5b54b3584497b6c36dddeb40abab96c25039ec68fc2bac06"
+  },
+  "conda_environment_sha256": "fa98545903f3cb3fd7da6225062400b3124a16b33210a18abf9644dddbb10ee3",
+  "resolved_config_digest": "8dfeba175fb7eb5c4af1378c5bb8b090486ea3a9266700a74aa62655d39623f8",
+  "scientific_protocol_id": "nchl-evogym-four-task-v4-500-generations",
+  "scientific_protocol_sha256": "cdfd6274efbc4726db823f927f996ca95d4f513c9bad9182b0cde058c3b44b76",
+  "scientific_protocol_status": "frozen"
+}

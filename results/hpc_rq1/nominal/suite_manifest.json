@@ -1,0 +1,92 @@
+{
+  "command": "scripts/run_nominal_suite.py --final --seeds 0 1 2 3 4 5 6 7 8 9 --output /home/rowanli.tangalin/tpr/tpr/results/hpc_rq1/nominal --workers 40 --resume",
+  "conda_environment_sha256": "fa98545903f3cb3fd7da6225062400b3124a16b33210a18abf9644dddbb10ee3",
+  "conditions": [
+    {
+      "morphology": "biped",
+      "task": "Walker-v0"
+    },
+    {
+      "morphology": "biped",
+      "task": "Carrier-v0"
+    },
+    {
+      "morphology": "biped",
+      "task": "Jumper-v0"
+    },
+    {
+      "morphology": "biped",
+      "task": "Thrower-v0"
+    },
+    {
+      "morphology": "thrower_arm",
+      "task": "Thrower-v0"
+    }
+  ],
+  "controllers": [
+    "static",
+    "nchl"
+  ],
+  "created_at_utc": "2026-09-12T11:30:20.774942+00:00",
+  "expected_runs": 100,
+  "phase": "final",
+  "repository_commit": null,
+  "run_index": "run_index.csv",
+  "schema_version": 1,
+  "scientific_protocol_id": "nchl-evogym-four-task-v4-500-generations",
+  "scientific_protocol_sha256": "cdfd6274efbc4726db823f927f996ca95d4f513c9bad9182b0cde058c3b44b76",
+  "scientific_protocol_status": "frozen",
+  "scientific_settings": {
+    "episodes_per_candidate": {
+      "nchl": 3,
+      "static": 1
+    },
+    "evolution": {
+      "generations": 500,
+      "kind": "es1",
+      "population_size": 40,
+      "sigma": 0.35
+    },
+    "fitness_aggregation": "mean",
+    "task_morphologies": [
+      {
+        "morphology": "biped",
+        "task": "Walker-v0"
+      },
+      {
+        "morphology": "biped",
+        "task": "Carrier-v0"
+      },
+      {
+        "morphology": "biped",
+        "task": "Jumper-v0"
+      },
+      {
+        "morphology": "biped",
+        "task": "Thrower-v0"
+      },
+      {
+        "morphology": "thrower_arm",
+        "task": "Thrower-v0"
+      }
+    ]
+  },
+  "tasks": [
+    "Walker-v0",
+    "Carrier-v0",
+    "Jumper-v0",
+    "Thrower-v0"
+  ],
+  "training_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ]
+}

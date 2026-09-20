@@ -1,0 +1,26 @@
+schema_version: 2
+name: nominal_walker_static_seed_009
+seed: 9
+task: Walker-v0
+morphology: biped
+network:
+  hidden_sizes:
+  - input
+  activation: tanh
+  bias: false
+controller:
+  kind: static
+evolution:
+  kind: es1
+  population_size: 40
+  generations: 500
+  sigma: 0.35
+evaluation:
+  protocol: nominal
+  episodes_per_candidate: 1
+  fitness_aggregation: mean
+  record_trace: false
+runtime:
+  device: cpu
+  workers: 40
+  torch_threads_per_worker: 1

@@ -1,0 +1,32 @@
+#!/bin/bash
+#PBS -N thesis-smoke
+#PBS -q commonCPUQ
+#PBS -l walltime=00:30:00
+#PBS -l select=1:ncpus=2:mem=4gb
+#PBS -j oe
+
+set -euo pipefail
+
+cd "${PBS_O_WORKDIR:-$(pwd)}"
+source pbs/activate_environment.sh
+
+export PYTHONUNBUFFERED=1
+export OMP_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+export NUMEXPR_NUM_THREADS=1
+export MPLBACKEND=Agg
+export MPLCONFIGDIR="${PBS_TMPDIR:-/tmp}/matplotlib_${PBS_JOBID:-manual}"
+mkdir -p "$MPLCONFIGDIR"
+
+OUTPUT="${OUTPUT:-artifacts/hpc_smoke_${PBS_JOBID:-manual}}"
+mkdir -p "$OUTPUT"
+
+echo "Host: $(hostname)"
+echo "Start: $(date)"
+python --version
+python scripts/capture_versions.py --output "$OUTPUT/runtime_manifest.json"
+conda list --explicit > "$OUTPUT/conda-explicit.txt"
+python -m pytest -q
+python scripts/verify_end_to_end.py --output "$OUTPUT/end_to_end" --workers 2
+echo "End: $(date)"

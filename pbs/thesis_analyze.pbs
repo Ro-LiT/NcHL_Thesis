@@ -1,0 +1,20 @@
+#!/bin/bash
+#PBS -N thesis-analysis
+#PBS -q commonCPUQ
+#PBS -l walltime=02:00:00
+#PBS -l select=1:ncpus=1:mem=8gb
+#PBS -j oe
+
+set -euo pipefail
+
+cd "${PBS_O_WORKDIR:-$(pwd)}"
+source pbs/activate_environment.sh
+
+export PYTHONUNBUFFERED=1
+export MPLBACKEND=Agg
+export MPLCONFIGDIR="${PBS_TMPDIR:-/tmp}/matplotlib_${PBS_JOBID:-manual}"
+mkdir -p "$MPLCONFIGDIR"
+
+RESULTS_ROOT="${RESULTS_ROOT:-${PBS_O_WORKDIR:-$(pwd)}/results/hpc_rq1}"
+python scripts/analyze_nominal.py "$RESULTS_ROOT/nominal" \
+  --output "$RESULTS_ROOT/nominal_analysis"
